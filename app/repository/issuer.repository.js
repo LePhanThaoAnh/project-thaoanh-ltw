@@ -1,4 +1,4 @@
-const { Issuer } = require("../models/index");
+const { Issuer } = require("../model/index");
 
 class IssuerRepository {
     // Hàm xây dựng khởi tạo

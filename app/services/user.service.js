@@ -10,9 +10,13 @@ class UserService {
 
     async find(filter) {
         const cursor = await this.userRepo.selectOne(filter);
-        return await cursor.toArray();
+        return  cursor;
     }
 
+    async findAll(filter) {
+        const cursor = await this.userRepo.selectAll(filter);
+        return  cursor;
+    }
     async findByName(name) {
         return await this.find({
             name: { $regex: new RegExp(name), $options: "i" },

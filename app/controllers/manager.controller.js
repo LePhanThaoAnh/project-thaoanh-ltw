@@ -36,7 +36,7 @@ exports.findAll = async (req,res, next) =>{
         if(name){
             document = await managerService.findByName(name);
         }else{
-            document = await managerService.find({});
+            document = await managerService.findAll();
         }
     }catch(error){
         return next(

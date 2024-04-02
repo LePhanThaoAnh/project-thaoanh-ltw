@@ -8,10 +8,6 @@ router.route("/")
     .post(books.create)
     .delete(books.deleteAll);
 
-router.route("/favorite")
-    .get(books.findAllFavorite);
-
-
 router.route("/:id")
     .get(books.findOne)
     .put(books.update)

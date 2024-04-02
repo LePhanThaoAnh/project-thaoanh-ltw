@@ -1,21 +1,20 @@
 const ApiError = require("../api-error");
-const UserService = require("../services/user.service");
-
+const BorrowBookService = require("../services/borrow_book.service");
 
 exports.findAll = async (req,res, next) =>{
     let document = [];
 
     try{
-        const userService = new UserService();
+        const borrowBookService = new BorrowBookService();
         const {name} = req.query;
         if(name){
-            document = await userService.findByName(name);
+            document = await borrowBookService.findByName(name);
         }else{
-            document = await userService.findAll();
+            document = await borrowBookService.findAll();
         }
     }catch(error){
         return next(
-            new ApqError(500,"An error occurred while retrieving contacts")
+            new ApiError(500,"An error occurred while retrieving contacts")
         );
     }
     return res.send(document);
@@ -23,8 +22,8 @@ exports.findAll = async (req,res, next) =>{
 
 exports.findOne = async (req,res, next) =>{
     try{
-        const userService = new UserService();
-        const documents = await userService.findById(req.params.id);
+        const borrowBookService = new BorrowBookService();
+        const documents = await borrowBookService.findById(req.params.id);
         if(!documents){
             return next(new ApiError(404,"Contact not found"));
         }
@@ -44,8 +43,8 @@ exports.update = async (req,res, next) =>{
     }
 
     try{
-        const userService = new UserService();
-        const document = await userService.update(req.params.id, req.body);
+        const borrowBookService = new BorrowBookService();
+        const document = await borrowBookService.update(req.params.id, req.body);
         if(!document){
             return next(new ApiError(404,"Contact not found")); 
         }
@@ -60,8 +59,8 @@ exports.update = async (req,res, next) =>{
 
 exports.delete = async (req,res, next) =>{
    try{
-        const userService = new UserService();
-        const document = await userService.delete(req.params.id);
+        const borrowBookService = new BorrowBookService();
+        const document = await borrowBookService.delete(req.params.id);
         if(!document){
             return next(new ApiError(404,"Contact not found")); 
         }
@@ -75,8 +74,8 @@ exports.delete = async (req,res, next) =>{
 
 exports.deleteAll = async (req,res, next) =>{
     try{
-        const userService = new UserService();
-        const deleteCount = await userService.deleteAll();
+        const borrowBookService = new BorrowBookService();
+        const deleteCount = await borrowBookService.deleteAll();
         return res.send({message:  `${deleteCount} Contact was delete successfully`});
    }catch(error){
     return next(
@@ -87,8 +86,8 @@ exports.deleteAll = async (req,res, next) =>{
 
 // exports.findAllFavorite = async (req,res, next) =>{
 //     try{
-//         const userService = new UserService();
-//         const document = await userService.findFavorite();
+//         const borrowBookService = new BorrowBookService();
+//         const document = await borrowBookService.findFavorite();
 //         return res.send(document);
 //    }catch(error){
 //     return next(
@@ -103,8 +102,8 @@ exports.create = async (req, res,next) => {
     }
 
     try{
-        const userService = new UserService();
-        const document = await userService.create(req.body);
+        const borrowBookService = new BorrowBookService();
+        const document = await borrowBookService.create(req.body);
         return res.send(document);
     }catch(e){
         return next(

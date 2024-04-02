@@ -10,11 +10,11 @@ exports.findAll = async (req,res, next) =>{
         if(name){
             document = await issuerService.findByName(name);
         }else{
-            document = await issuerService.find({});
+            document = await issuerService.findAll();
         }
     }catch(error){
         return next(
-            new ApqError(500,"An error occurred while retrieving contacts")
+            new ApiError(500,"An error occurred while retrieving contacts")
         );
     }
     return res.send(document);

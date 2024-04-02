@@ -1,4 +1,4 @@
-const { User } = require("../models/index");
+const { User } = require("../model/index");
 
 class UserRepository {
     // Hàm xây dựng khởi tạo

@@ -1,4 +1,4 @@
-const { Book } = require("../models/index");
+const { Book } = require("../model/index");
 
 class BookRepository {
     // Hàm xây dựng khởi tạo

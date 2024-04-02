@@ -1,4 +1,4 @@
-const { Manager } = require("../models/index");
+const { Manager } = require("../model/index");
 
 class ManagerRepository {
     // Hàm xây dựng khởi tạo

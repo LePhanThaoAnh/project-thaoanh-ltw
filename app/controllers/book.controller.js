@@ -1,5 +1,5 @@
 const ApiError = require("../api-error");
-const BookService = require("../services/issuer.service");
+const BookService = require("../services/book.service");
 
 exports.findAll = async (req,res, next) =>{
     let document = [];
@@ -10,7 +10,7 @@ exports.findAll = async (req,res, next) =>{
         if(name){
             document = await bookService.findByName(name);
         }else{
-            document = await bookService.find({});
+            document = await bookService.findAll();
         }
     }catch(error){
         return next(

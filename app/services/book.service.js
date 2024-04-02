@@ -17,10 +17,13 @@ class BookService {
     }
 
     async find(filter) {
-        const cursor = await this.bookRepo.selectOne(filter);
-        return await cursor.toArray();
+        const cursor = await  this.bookRepo.selectOne(filter);
+        return cursor;
     }
-
+    async findAll() {
+        const cursor = await this.bookRepo.selectAll();
+        return cursor;
+    }
     async findByName(name) {
         return await this.find({
             name: { $regex: new RegExp(name), $options: "i" },

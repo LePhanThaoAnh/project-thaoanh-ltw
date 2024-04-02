@@ -22,9 +22,12 @@ class BookService {
 
     async find(filter) {
         const cursor = await  this.borrowBookRepo.selectOne(filter);
-        return await cursor.toArray();
+        return cursor;
     }
-
+    async findAll() {
+        const cursor = await this.borrowBookRepo.selectAll();
+        return cursor;
+    }
     async findByName(name) {
         return await this.find({
             name: { $regex: new RegExp(name), $options: "i" },

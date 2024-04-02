@@ -10,6 +10,7 @@ const BookSchema = new Schema(
             ref: "issuers",
             required: true 
         },
+        masach: { type: String, trim: true, required: true },
         tensach: { type: String, trim: true, required: true },
         dongia: { type: String, trim: true, required: true },
         soquyen: { type: Number, trim: true, required: true },

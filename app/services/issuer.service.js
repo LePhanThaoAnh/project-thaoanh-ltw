@@ -10,7 +10,12 @@ class IssuerService {
 
     async find(filter) {
         const cursor = await this.issuerRepo.selectOne(filter);
-        return await cursor.toArray();
+        return  cursor;
+    }
+
+    async findAll(filter) {
+        const cursor = await this.issuerRepo.selectAll(filter);
+        return  cursor;
     }
 
     async findByName(name) {
