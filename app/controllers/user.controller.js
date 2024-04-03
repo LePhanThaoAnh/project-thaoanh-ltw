@@ -98,10 +98,6 @@ exports.deleteAll = async (req,res, next) =>{
 // };
 
 exports.create = async (req, res,next) => {
-    if(!req.body?.name){
-        return next(new ApiError(400, "Name can not be empty"));
-    }
-
     try{
         const userService = new UserService();
         const document = await userService.create(req.body);
