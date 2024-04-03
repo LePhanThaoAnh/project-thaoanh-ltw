@@ -16,6 +16,7 @@
     "mongoose-autopopulate": "^0.17.1",
     "mongoose-data-seed": "^2.1.6"
   },
+  
   "devDependencies": {
     "nodemon": "^3.1.0"
   }

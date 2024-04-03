@@ -6,7 +6,7 @@ const UserSchema = new Schema(
         // trim: chuỗi kh được có khoảng cách ở đầu cuối, required bắt buộc
         hoten: { type: String, trim: true, required: true },
         ngaysinh: { type: Date, trim: true, required: true },
-        sodienthoai: { type: Number, trim: true, required: true },
+        sodienthoai: { type: String, trim: true, required: true },
         password: { type: String, trim: true, required: true },
         diachi: { type: String, trim: true, required: true },
         gioitinh: { type: String, trim: true, required: true },
