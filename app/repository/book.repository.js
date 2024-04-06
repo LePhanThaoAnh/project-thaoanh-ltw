@@ -81,9 +81,7 @@ class BookRepository {
     }
     async delete(id) {
         try {
-            return await Book.updateOne({ _id: id },{
-                deleteAt: new Date()
-            });
+            return await Book.deleteOne( id);
         } catch (err) {
             console.log(err);
         }

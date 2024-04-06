@@ -1,7 +1,6 @@
 const ApiError = require("../api-error");
 const UserService = require("../services/user.service");
 
-
 exports.findAll = async (req,res, next) =>{
     let document = [];
 
@@ -49,7 +48,7 @@ exports.update = async (req,res, next) =>{
         if(!document){
             return next(new ApiError(404,"Contact not found")); 
         }
-        return res.send({message: "Contact was updated successfully"});
+        return res.send({message: "Người dùng cập nhật thành công"});
 
     }catch(err){
         return next(
@@ -85,18 +84,6 @@ exports.deleteAll = async (req,res, next) =>{
     }
 };
 
-// exports.findAllFavorite = async (req,res, next) =>{
-//     try{
-//         const userService = new UserService();
-//         const document = await userService.findFavorite();
-//         return res.send(document);
-//    }catch(error){
-//     return next(
-//         new ApiError(500,"An error occurred while retrieving favorite contacts")
-//         );
-//     }
-// };
-
 exports.create = async (req, res,next) => {
     try{
         const userService = new UserService();
@@ -105,6 +92,35 @@ exports.create = async (req, res,next) => {
     }catch(e){
         return next(
             new ApiError(500,"An error occurred while creating the contact")
+        );
+    }
+};
+
+// exports.login = async (req, res,next) => {
+//     if(req.body.sodienthoai && req.body.matkhau){
+//         try{
+//             const userService = new UserService();
+//             await userService.login({
+//                 email: req.body.email,
+//                 password: req.body.matkhau,
+//             });
+//         }catch(e){
+//             return next(
+//                 new ApiError(500,"Lỗi khi đăng nhập người dùng")
+//             );
+//         }
+//     }
+    
+// };
+exports.login = async (req, res, next) => {
+    try {
+        const userService = new UserService();
+        const { sodienthoai, password } = req.body; // Lấy số điện thoại và mật khẩu từ request body
+        const document = await userService.login({ sodienthoai, password }); // Gửi thông tin đăng nhập đến userService
+        return res.send(document);
+    } catch (error) {
+        return next(
+            new ApiError(500, "Lỗi khi đăng nhập người dùng")
         );
     }
 };

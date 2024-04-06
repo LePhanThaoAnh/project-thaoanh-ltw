@@ -81,9 +81,7 @@ class IssuerRepository {
     }
     async delete(id) {
         try {
-            return await Issuer.updateOne({ _id: id },{
-                deleteAt: new Date()
-            });
+            return await Issuer.deleteOne(id);
         } catch (err) {
             console.log(err);
         }

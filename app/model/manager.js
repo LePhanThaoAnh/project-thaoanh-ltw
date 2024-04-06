@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
+const bcrypt = require('bcrypt');
+const { async } = require("rxjs");
+const SALT_WORK_FACTOR = 10;
 const ManagerSchema = new Schema(
     {
         // trim: chuỗi kh được có khoảng cách ở đầu cuối, required bắt buộc

@@ -1,7 +1,9 @@
 const express = require("express");
 const borrowBooks = require("../controllers/borrow_book.controller");
-
+const {Middleware} = require("../middlewares/index")
+const mid = new Middleware();
 const router = express.Router();
+router.use(mid.ensureAuthenticated);
 
 router.route("/")
     .get(borrowBooks.findAll)

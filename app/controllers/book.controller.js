@@ -1,6 +1,6 @@
 const ApiError = require("../api-error");
 const BookService = require("../services/book.service");
-
+const MongoDB = require("../utils/mongodb.util");
 exports.findAll = async (req,res, next) =>{
     let document = [];
 
@@ -14,7 +14,7 @@ exports.findAll = async (req,res, next) =>{
         }
     }catch(error){
         return next(
-            new ApqError(500,"An error occurred while retrieving contacts")
+            new ApqError(500,"An error occurred while retrieving Sáchs")
         );
     }
     return res.send(document);
@@ -25,13 +25,13 @@ exports.findOne = async (req,res, next) =>{
         const bookService = new BookService();
         const documents = await bookService.findById(req.params.id);
         if(!documents){
-            return next(new ApiError(404,"Contact not found"));
+            return next(new ApiError(404,"Sách not found"));
         }
         return res.send(documents);
     } catch(error){
         return next(
             new ApiError(
-                500,  `Error requesting contact with id = ${req.params.id}`
+                500,  `Error requesting Sách with id = ${req.params.id}`
             )
         );
     }
@@ -46,13 +46,13 @@ exports.update = async (req,res, next) =>{
         const bookService = new BookService();
         const document = await bookService.update(req.params.id, req.body);
         if(!document){
-            return next(new ApiError(404,"Contact not found")); 
+            return next(new ApiError(404,"Sách not found")); 
         }
-        return res.send({message: "Contact was updated successfully"});
+        return res.send({message: "Sách was updated successfully"});
 
     }catch(err){
         return next(
-            new ApiError(500,`Error update contact with id = ${req.params.id}`)
+            new ApiError(500,`Error update Sách with id = ${req.params.id}`)
         );
     }
 };
@@ -62,12 +62,12 @@ exports.delete = async (req,res, next) =>{
         const bookService = new BookService();
         const document = await bookService.delete(req.params.id);
         if(!document){
-            return next(new ApiError(404,"Contact not found")); 
+            return next(new ApiError(404,"Sách not found")); 
         }
-        return res.send({message: "Contact was delete successfully"});
+        return res.send({message: "Sách was delete successfully"});
    }catch(error){
     return next(
-        new ApiError(500,`Could not delete contact with id = ${req.params.id}`)
+        new ApiError(500,`Could not delete Sách with id = ${req.params.id}`)
         );
     }
 };
@@ -76,10 +76,10 @@ exports.deleteAll = async (req,res, next) =>{
     try{
         const bookService = new BookService();
         const deleteCount = await bookService.deleteAll();
-        return res.send({message:  `${deleteCount} Contact was delete successfully`});
+        return res.send({message:  `${deleteCount} Sách was delete successfully`});
    }catch(error){
     return next(
-        new ApiError(500,"An error occurred while removing all contact")
+        new ApiError(500,"An error occurred while removing all Sách")
         );
     }
 };
@@ -91,7 +91,7 @@ exports.deleteAll = async (req,res, next) =>{
 //         return res.send(document);
 //    }catch(error){
 //     return next(
-//         new ApiError(500,"An error occurred while retrieving favorite contacts")
+//         new ApiError(500,"An error occurred while retrieving favorite Sáchs")
 //         );
 //     }
 // };
@@ -103,7 +103,7 @@ exports.create = async (req, res,next) => {
         return res.send(document);
     }catch(e){
         return next(
-            new ApiError(500,"An error occurred while creating the contact")
+            new ApiError(500,"An error occurred while creating the Sách")
         );
     }
 };

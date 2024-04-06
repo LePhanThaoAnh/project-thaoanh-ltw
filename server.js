@@ -2,6 +2,8 @@ const app = require("./app");
 const config = require("./app/config");
 // const MongoDB = require("./app/utils/mongodb.util");
 const mongoose = require('mongoose');
+mongoose.set('strictQuery', true);
+
 async function connect(){
     try{
         await mongoose.connect("mongodb://127.0.0.1:27017/book", {
