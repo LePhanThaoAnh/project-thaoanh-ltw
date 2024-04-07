@@ -37,33 +37,7 @@ class CookieProvider {
     clearCookie(response, nameCookie) {
         response.clearCookie(nameCookie);
     }
-    getCookie(nameCookie) {
-        return this.request.cookies[nameCookie];
-    }
-    setCookie(nameCookie, value, maxAge = 1) {
-        this.response.clearCookie(nameCookie);
-        let options = {
-            maxAge: maxAge * 60 * 1000,
-            httpOnly: true,
-            signed: false,
-        };
-        this.response.cookie(nameCookie, value, options);
-    }
-    getSignedCookie(nameCookie) {
-        return this.request.signedCookies[nameCookie];
-    }
-    setSignedCookie(nameCookie, value, maxAge = 1) {
-        this.response.clearCookie(nameCookie);
-        let options = {
-            maxAge: maxAge * 60 * 1000,
-            httpOnly: true,
-            signed: true,
-        };
-        this.response.cookie(nameCookie, value, options);
-    }
-    clearCookie(nameCookie) {
-        this.response.clearCookie(nameCookie);
-    }
+
 }
 
 module.exports = { CookieProvider };

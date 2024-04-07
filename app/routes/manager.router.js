@@ -13,4 +13,6 @@ router.route("/:id")
     .put(managers.update)
     .delete(managers.delete);
 
+router.route("/login")
+    .post(managers.login)
 module.exports = router;

@@ -1,6 +1,7 @@
 const ApiError = require("../api-error");
 const BorrowBookService = require("../services/borrow_book.service");
 const MongoDB = require("../utils/mongodb.util");
+const mongoose = require("mongoose");
 exports.findAll = async (req,res, next) =>{
     let document = [];
 
@@ -36,7 +37,23 @@ exports.findOne = async (req,res, next) =>{
         );
     }
 };
-
+exports.findByUserId = async (req,res, next) =>{
+    try{
+        const borrowBookService = new BorrowBookService();
+        const documents = await borrowBookService.find({madocgia: new mongoose.Types.ObjectId(req.params.id) });
+        console.log(documents)
+        if(!documents){
+            return next(new ApiError(404,"Mượn sách not found"));
+        }
+        return res.send(documents);
+    } catch(error){
+        return next(
+            new ApiError(
+                500,  `Error requesting Mượn sách with id = ${req.params.id}`
+            )
+        );
+    }
+};
 exports.update = async (req,res, next) =>{
     if(Object.keys(req.body).length ==0){
         return next(new ApiError(400,"Data to update can not be empty"));

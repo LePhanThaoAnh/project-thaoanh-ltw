@@ -1,9 +1,24 @@
 const express = require("express");
 const users = require("../controllers/user.controller");
+const { Middleware } = require("../middlewares/index");
+const mid = new Middleware();
+
 const router = express.Router();
+
+router.route("/login")
+    .post(users.login)
+
 router.route("/")
-    .get(users.findAll)
     .post(users.create)
+    .get(users.findAll)
+router.use(mid.authenticate);
+
+router.route("/logout")
+    .post(users.logout);
+
+router.route("/")
+    
+    
     .delete(users.deleteAll);
 
 router.route("/:id")
@@ -11,7 +26,5 @@ router.route("/:id")
     .put(users.update)
     .delete(users.delete);
 
-router.route("/login")
-    .post(users.login)
 
 module.exports = router;

@@ -2,11 +2,10 @@ const express = require("express");
 const books = require("../controllers/book.controller");
 // const { Middleware } = require("../middlewares/index");
 // const mid = new Middleware();
-// // Middleware ensureAuthenticated sẽ được áp dụng cho tất cả các tuyến trong router này
-// router.use(mid.ensureAuthenticated);
+
 const router = express.Router();
 
-
+// router.use(mid.authenticate);
 router.route("/")
     .get(books.findAll)
     .post(books.create)

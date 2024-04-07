@@ -27,13 +27,13 @@ class UserService {
         return await this.userRepo.selectById(id);
     }
     async update(id, payload) {
-        let issuer = this.findById(id);
+        let issuer = await this.findById(id);
         const result = await this.userRepo.updateOne(issuer._id, payload);
         return result;
     }
 
     async delete(id) {
-        let issuer = this.findById(id);
+        let issuer = await this.findById(id);
         const result = await this.userRepo.delete(issuer._id);
         return result;
     }

@@ -48,6 +48,7 @@ exports.update = async (req,res, next) =>{
         if(!document){
             return next(new ApiError(404,"Nhà xuất bản not found")); 
         }
+        console.log("A")
         return res.send({message: "Nhà xuất bản cập nhật thành công"});
 
     }catch(err){

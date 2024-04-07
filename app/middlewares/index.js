@@ -1,18 +1,22 @@
 const constants = require("../constants/index");
-const { CookieProvider } = require("../helper/cookies");
+// const { CookieProvider } = require("../helper/cookies");
 class Middleware{
+
+
     async authenticate(req, res, next){
-        let cookies = new CookieProvider(req, res);
-        let userString = cookies.getCookie(constants.user_info);
-        if(userString ){
-            req.user = JSON.parse(userString);
+        // let userString = req.user;
+        let user = req.headers["user"];
+        if(user){
+            req.user = user;
+            return next();
+        }else{
+          return res.send("Lỗi đăng nhập")
         }
-        await next();
     }
 
     async ensureAuthenticated(req, res, next){
         try {
-            if (req.isAuthenticated()) {
+            if (req.authenticated()) {
               return next(); 
             }
             // Chuyển hướng đến trang đăng nhập nếu chưa đăng nhập

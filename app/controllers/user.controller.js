@@ -1,6 +1,7 @@
 const ApiError = require("../api-error");
 const UserService = require("../services/user.service");
-
+const { CookieProvider } = require("../helper/cookies");
+const constants = require("../constants/index");
 exports.findAll = async (req,res, next) =>{
     let document = [];
 
@@ -117,10 +118,31 @@ exports.login = async (req, res, next) => {
         const userService = new UserService();
         const { sodienthoai, password } = req.body; // Lấy số điện thoại và mật khẩu từ request body
         const document = await userService.login({ sodienthoai, password }); // Gửi thông tin đăng nhập đến userService
-        return res.send(document);
+        console.log(document)
+        if(document){
+                req.user = JSON.stringify(document);
+            }
+        return res.send(JSON.stringify(document));
     } catch (error) {
         return next(
             new ApiError(500, "Lỗi khi đăng nhập người dùng")
         );
     }
 };
+
+exports.logout = async (req, res, next) => {
+    try {
+        if (!req.user) {
+            return res.status(401).json({ message: "Người dùng chưa đăng nhập" });
+        }
+        req.user = null; // Xóa thông tin người dùng khỏi session hoặc token
+        console.log("Đã đăng xuất");
+        return res.json({
+            message: "Đăng xuất thành công"
+        });
+    } catch (error) {
+        return next(
+            new ApiError(500, "Lỗi khi đăng xuất người dùng")
+        );
+    }
+}

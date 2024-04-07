@@ -18,7 +18,7 @@ const BorrowBookSchema = new Schema(
             required: true 
         },
         ngaymuon: { type: String, trim: true, required: true },
-        ngaymuon: { type: String, trim: true, required: true },
+        ngaytra: { type: String, trim: true, required: true },
         trangthai: { type: String, trim: true, default: StatusEnum.Damuon },
         deleteAt: {type:Date},
     },

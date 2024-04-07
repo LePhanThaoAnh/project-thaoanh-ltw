@@ -101,7 +101,6 @@ class UserRepository {
     async login(user) {
         try {
             // lọc 1 thằng theo yêu cầu
-            
             let filter = {
                 deleteAt : {
                     $exists: false,

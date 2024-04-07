@@ -21,9 +21,10 @@ class BookService {
     }
 
     async find(filter) {
-        const cursor = await  this.borrowBookRepo.selectOne(filter);
+        const cursor = await  this.borrowBookRepo.select(filter);
         return cursor;
     }
+    
     async findAll() {
         const cursor = await this.borrowBookRepo.selectAll();
         return cursor;
@@ -39,13 +40,13 @@ class BookService {
     }
     async update(id, payload) {
         payload = await this.extract(payload);
-        let issuer = this.findById(id);
+        let issuer = await this.findById(id);
         const result = await  this.borrowBookRepo.updateOne(issuer._id, payload);
         return result;
     }
 
     async delete(id) {
-        let issuer = this.findById(id);
+        let issuer = await this.findById(id);
         const result = await  this.borrowBookRepo.delete(issuer._id);
         return result;
     }

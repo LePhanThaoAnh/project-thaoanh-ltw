@@ -28,13 +28,13 @@ class IssuerService {
         return await this.issuerRepo.selectById(id);
     }
     async update(id, payload) {
-        let issuer = this.findById(id);
+        let issuer = await this.findById(id);
         const result = await this.issuerRepo.updateOne(issuer._id, payload);
         return result;
     }
 
     async delete(id) {
-        let issuer = this.findById(id);
+        let issuer = await this.findById(id);
         const result = await this.issuerRepo.delete(issuer._id);
         return result;
     }

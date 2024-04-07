@@ -33,17 +33,23 @@ class BookService {
     async findById(id) {
         return await this.bookRepo.selectById(id);
     }
+
     async update(id, payload) {
         payload = await this.extract(payload);
-        let issuer = this.findById(id);
-        const result = await this.bookRepo.updateOne(issuer._id, payload);
+        let book = await this.findById(id);
+        const result = await this.bookRepo.updateOne(book._id, payload);
         return result;
     }
 
     async delete(id) {
-        let issuer = this.findById(id);
-        const result = await this.bookRepo.delete(issuer._id);
-        return result;
+        try {
+            let book = await this.findById(id);
+            return await bookRepo.updateOne({ _id: book._id },{
+                deleteAt: new Date()
+            });
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     async deleteAll() {
