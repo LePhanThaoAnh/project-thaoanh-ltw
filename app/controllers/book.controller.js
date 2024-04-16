@@ -57,6 +57,22 @@ exports.update = async (req,res, next) =>{
     }
 };
 
+exports.updateQuantity = async (req,res, next) =>{
+    try{
+        const bookService = new BookService();
+        const document = await bookService.updateQuantity(req.params.id);
+        if(!document){
+            return next(new ApiError(404,"Đã trừ số lượng sách")); 
+        }
+        return res.send({message: "Sách was updated successfully"});
+
+    }catch(err){
+        return next(
+            new ApiError(500,`Error update Sách with id = ${req.params.id}`)
+        );
+    }
+};
+
 exports.delete = async (req,res, next) =>{
    try{
         const bookService = new BookService();

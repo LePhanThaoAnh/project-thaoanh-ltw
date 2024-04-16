@@ -16,4 +16,7 @@ router.route("/:id")
     .put(books.update)
     .delete(books.delete);
 
+router.route("/update/:id")
+    .put(books.updateQuantity)
+
 module.exports = router;

@@ -41,6 +41,14 @@ class BookService {
         return result;
     }
 
+    async updateQuantity(id) {
+        let book = await this.findById(id);
+        // Trừ số lượng sách đi quantityChange
+        book.soquyen = book.soquyen - 1;
+        const result = await this.bookRepo.updateOne(book._id, { soquyen: book.soquyen });
+        return result;
+    }
+
     async delete(id) {
         try {
             let book = await this.findById(id);
